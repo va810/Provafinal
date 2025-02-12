@@ -9,14 +9,14 @@ import { redirect } from "next/navigation";
 
 
 export default async function StudentRegistrationForm() {
- async function registerStudent(formData: FormData) {
+ async function registerProduct(formData: FormData) {
   'use server'
-  const name = formData.get('name') as string;
-  const email = formData.get('email') as string;
-  await sql`INSERT INTO  students (name, email) VALUES (${name}, ${email})` 
-  console.log('Estudante registrado:', { name, email })
+  const neme = formData.get('neme') as string;
+  const description = formData.get('description') as string;
+  await sql`INSERT INTO  products (neme, description) VALUES (${neme}, ${description})` 
+  console.log('Produto registrado:', { neme, description })
  
-  redirect('/dashboard/student/list');
+  redirect('/dashboard/produtc/list');
  
 }
 
@@ -24,17 +24,17 @@ export default async function StudentRegistrationForm() {
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <Card className="w-[350px]">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold text-center">Cadastro de Estudante</CardTitle>
+          <CardTitle className="text-2xl font-bold text-center">Cadastro de Produtos</CardTitle>
         </CardHeader>
         <CardContent>
-          <form action={registerStudent} className="space-y-4">
+          <form action={registerProduct} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="name">Nome</Label>
-              <Input type="text" id="name" name="name" required />
+              <Label htmlFor="neme">Nome</Label>
+              <Input type="text" id="neme" name="neme" required />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="email">E-mail</Label>
-              <Input type="email" id="email" name="email" required />
+              <Label htmlFor="description">Descrição</Label>
+              <Input type="text" id="description" name="description" required />
             </div>
             <Button type="submit" className="w-full bg-black hover:bg-gray-800">
               Cadastrar
